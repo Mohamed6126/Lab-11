@@ -1,0 +1,69 @@
+[
+    {
+        "groupName": "zzz",
+        "groupID": "group1",
+        "members": [],
+        "description": "A test group for learning",
+        "posts": [{
+            "Type": "post",
+            "UserID": "user2",
+            "CreationTime": "2024-12-13T13:30:26.281038100",
+            "ImageFilePath": "Images/user2/121.jpg",
+            "ContentID": "121",
+            "Text": "This is a post in the group."
+        }],
+        "admins": ["user2"],
+        "membershipRequests": ["user1"]
+    },
+    {
+        "groupName": "xxx  Group",
+        "groupID": "group2",
+        "members": ["user2"],
+        "description": "A test group for learning",
+        "posts": [
+            {
+                "Type": "post",
+                "UserID": "user1",
+                "CreationTime": "2024-12-13T13:38:26.346061400",
+                "ImageFilePath": "Images/user1/126.jpg",
+                "ContentID": "126",
+                "Text": "aaaaaaaaaaaa is a post in the group."
+            },
+            {
+                "Type": "Post",
+                "UserID": "user1",
+                "CreationTime": "2024-12-13T22:29:23.192724",
+                "ImageFilePath": "Images/user1/133.jpg",
+                "ContentID": "133",
+                "Text": "test"
+            },
+            {
+                "Type": "Post",
+                "UserID": "user1",
+                "CreationTime": "2024-12-13T22:30:42.982206",
+                "ImageFilePath": "Images/user1/134.jpg",
+                "ContentID": "134",
+                "Text": "test"
+            },
+            {
+                "Type": "Post",
+                "UserID": "user1",
+                "CreationTime": "2024-12-18T10:30:31.325689",
+                "ImageFilePath": "Images/user1/135.jpg",
+                "ContentID": "135",
+                "Text": "test"
+            }
+        ],
+        "admins": ["user1"],
+        "membershipRequests": []
+    },
+    {
+        "groupName": "hamada",
+        "groupID": "group3",
+        "members": [],
+        "description": "hello",
+        "posts": [],
+        "admins": ["user1"],
+        "membershipRequests": []
+    }
+]

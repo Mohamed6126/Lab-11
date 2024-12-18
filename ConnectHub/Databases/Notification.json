@@ -1,0 +1,37 @@
+[
+  {
+    "Type": "group post",
+    "Message": "New Post is added to group group2",
+    "UserID": "user2"
+  },
+  {
+    "Type": "new post",
+    "Message": "user1 added new post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Friend Request",
+    "Message": "mohamedsent a friend request",
+    "UserID": "user1"
+  },
+  {
+    "Type": "group post",
+    "Message": "New Post is added to group group2",
+    "UserID": "user2"
+  },
+  {
+    "Type": "new post",
+    "Message": "user1 added new post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Friend Request",
+    "Message": "ahmedsent a friend request",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Friend Request",
+    "Message": "ahmedsent a friend request",
+    "UserID": "user2"
+  }
+]
