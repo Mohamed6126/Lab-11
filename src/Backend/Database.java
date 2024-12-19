@@ -140,16 +140,22 @@ public final class Database {
         jsonObject.put("Text", content.getText());
         jsonObject.put("Type", content.getType());
         jsonObject.put("ImageFilePath", content.getImageFilename());
-        if (content.getType().equalsIgnoreCase("post")) {
+        
+        if (content.getType().equalsIgnoreCase("Post")) {
+            
             jsonObject.put("Likes", content.getNumberOfLikes());
 
-            HashMap<String, String> comments = content.getComments();
+            HashMap <String, String> comments = content.getComments();
             JSONArray commentsJSONArray = new JSONArray();
             if(comments!=null){
                 for (Map.Entry<String, String> entry : comments.entrySet()) {
+                    System.out.println(entry.getValue());
                 commentsJSONArray.put(entry.getKey() + "," + entry.getValue());
             }
             jsonObject.put("Comments", commentsJSONArray);
+            }
+            else{
+                jsonObject.put("Comments", new JSONArray());
             }
         }
         //0 likes and empty JSONArray for stories

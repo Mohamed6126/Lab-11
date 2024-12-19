@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -76,6 +77,9 @@ public class NewsFeed extends javax.swing.JFrame {
                     if (comment != null && !comment.trim().isEmpty()) {
                         System.out.println("Comment saying: " + comment + "added");
                         c.addComment(S.getLoggedInUser().getUserID(), comment);
+                        for(String line : c.getComments().keySet()){
+                            System.out.println(line  + " , " + c.getComments().get(line));
+                        }
                     }
                     });
                     
