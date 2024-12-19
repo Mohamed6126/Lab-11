@@ -75,6 +75,7 @@ public class NewsFeed extends javax.swing.JFrame {
                     String comment = JOptionPane.showInputDialog("Enter your comment:");
                     if (comment != null && !comment.trim().isEmpty()) {
                         System.out.println("Comment saying: " + comment + "added");
+                        c.addComment(S.getLoggedInUser().getUserID(), comment);
                     }
                     });
                     

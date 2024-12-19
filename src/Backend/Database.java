@@ -145,10 +145,12 @@ public final class Database {
 
             HashMap<String, String> comments = content.getComments();
             JSONArray commentsJSONArray = new JSONArray();
-            for (Map.Entry<String, String> entry : comments.entrySet()) {
+            if(comments!=null){
+                for (Map.Entry<String, String> entry : comments.entrySet()) {
                 commentsJSONArray.put(entry.getKey() + "," + entry.getValue());
             }
             jsonObject.put("Comments", commentsJSONArray);
+            }
         }
         //0 likes and empty JSONArray for stories
         else{
