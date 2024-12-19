@@ -1,0 +1,21 @@
+{"chats": [{
+    "user2ID": "user2",
+    "messages": [
+        {
+            "senderID": "user1",
+            "message": "zamalek is the best",
+            "timestamp": "2024-12-19T14:34:45.318991600"
+        },
+        {
+            "senderID": "user1",
+            "message": "zamalek is the best",
+            "timestamp": "2024-12-19T14:35:42.839903900"
+        },
+        {
+            "senderID": "user1",
+            "message": "zamalek is the best",
+            "timestamp": "2024-12-19T14:40:08.224920900"
+        }
+    ],
+    "user1ID": "user1"
+}]}
