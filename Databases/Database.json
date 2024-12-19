@@ -7,9 +7,8 @@
         "ProfilePhotoPath": "CoverProfileImages/Profiles/user2.jpeg",
         "BlockedUsersID": [],
         "CoverPhotoPath": "CoverProfileImages/Covers/user2.jpeg",
-        "FriendsID": [],
+        "FriendsID": ["user1"],
         "IncomingFriendRequestsID": [
-
         ],
         "Contents": [
             {
@@ -65,7 +64,7 @@
         "ProfilePhotoPath": "CoverProfileImages/Profiles/user1.jpeg",
         "BlockedUsersID": [],
         "CoverPhotoPath": "CoverProfileImages/Covers/user1.jpeg",
-        "FriendsID": ["user1"],
+        "FriendsID": ["user2"],
         "IncomingFriendRequestsID": [],
         "Contents": [
             {
@@ -181,8 +180,6 @@
         ],
         "Username": "ahmed",
         "UserID": "user1",
-        "SentFriendRequestsID": [
-            "user2"
-        ]
+        "SentFriendRequestsID": []
     }
 ]
