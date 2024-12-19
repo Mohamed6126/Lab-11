@@ -410,6 +410,8 @@ public class Session {
     }
     
 public void addMessage(String userID1, String userID2, String message) throws IOException {
+   int check=1;
+   
     JSONObject chatData = readChatFile();  
     JSONArray chats = chatData.getJSONArray("chats");
     boolean chatExists = false;
