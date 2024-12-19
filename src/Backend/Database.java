@@ -142,18 +142,17 @@ public final class Database {
         jsonObject.put("ImageFilePath", content.getImageFilename());
         if (content.getType().equalsIgnoreCase("post")) {
             jsonObject.put("Likes", content.getNumberOfLikes());
-
             HashMap<String, String> comments = content.getComments();
             JSONArray commentsJSONArray = new JSONArray();
+            if(comments != null) {
             for (Map.Entry<String, String> entry : comments.entrySet()) {
                 commentsJSONArray.put(entry.getKey() + "," + entry.getValue());
             }
             jsonObject.put("Comments", commentsJSONArray);
-        }
-        //0 likes and empty JSONArray for stories
-        else{
+        }else{
             jsonObject.put("Likes", content.getNumberOfLikes());
             jsonObject.put("Comments", new JSONArray());       
+        }
         }
         return jsonObject;
     }
@@ -186,24 +185,35 @@ public final class Database {
             Content content = new Content(contentID, userID, creationTime, text, image, imageFilename, type);
             
             //only posts have likes and comments
-            if (type.equalsIgnoreCase("post")) {
+            if (type.equalsIgnoreCase("Post")) {
                 int numberOfLikes;
                 HashMap<String, String> comments = new HashMap<>();
-                String concatenatedString;
+                String concatenatedString = "";
 
                 numberOfLikes = contentJSONObject.getInt("Likes");
                 content.setNumberOfLikes(numberOfLikes);
-                
-                JSONArray commentsArray = contentJSONObject.getJSONArray("Comments");
-                for (int j = 0; j < commentsArray.length(); j++) {
-                    concatenatedString = commentsArray.getString(j);
-                    String[] separatedString = concatenatedString.split(",");
-                    String commentUserId = separatedString[0];
-                    String comment = separatedString[1];
-                    comments.put(commentUserId, comment);
+                if (contentJSONObject.has("Comments")) {
+                    JSONArray commentsArray = contentJSONObject.getJSONArray("Comments");
+
+                    for (int j = 0; j < commentsArray.length(); j++) {
+                         commentsArray.getString(j);
+                        String[] separatedString = concatenatedString.split(",");
+
+                        if (separatedString.length == 2) {
+                            String commentUserId = separatedString[0];
+                            String comment = separatedString[1];
+                            comments.put(commentUserId, comment);
+                        } else {
+                            System.out.println("Invalid comment format: " + concatenatedString);
+                        }
+                    }
+
+                    content.setComments(comments);
+                } else {
+                    System.out.println("No comments found in the JSON object.");
                 }
-            content.setComments(comments);
             }
+                
             //no need to set numberOfLikes or comments for story 
             //because they're already initialized in the constructor
             contents.add(content);
@@ -303,7 +313,7 @@ public final class Database {
             }
         }
 
-        if (dateOfBirth.isAfter(java.time.LocalDate.now())) {
+        if (dateOfBirth.isAfter(LocalDate.now())) {
             return -1;
         }
         if (!(email.contains("@")) || !(email.contains(".")) || !(email.indexOf("@") <= email.indexOf(".") + 3)) {
