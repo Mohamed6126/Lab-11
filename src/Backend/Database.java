@@ -185,7 +185,7 @@ public final class Database {
             Content content = new Content(contentID, userID, creationTime, text, image, imageFilename, type);
             
             //only posts have likes and comments
-            if (type.equalsIgnoreCase("post")) {
+            if (type.equalsIgnoreCase("Post")) {
                 int numberOfLikes;
                 HashMap<String, String> comments = new HashMap<>();
                 String concatenatedString = "";
