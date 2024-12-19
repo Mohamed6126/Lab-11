@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,9 +54,50 @@ public class NewsFeed extends javax.swing.JFrame {
                         imageLabel.setIcon(new ImageIcon(scaledImage));
                         postPanel.add(imageLabel, java.awt.BorderLayout.CENTER);
                     }
-                    System.out.println(c.getText());
                     JLabel postText = new JLabel(c.getText());
                     postPanel.add(postText, java.awt.BorderLayout.SOUTH);
+                    
+                    JPanel buttonPanel = new JPanel();
+                    buttonPanel.setLayout(new java.awt.FlowLayout()); // Arrange buttons in a row
+
+                    // Create buttons
+                    JButton likeButton = new JButton("Like");
+                    JButton addCommentButton = new JButton("Add comment");
+                    JButton showCommentsButton = new JButton("Show comments");
+
+                    likeButton.addActionListener(e -> {
+                        System.out.println("Liked post by: " + S.getLoggedInUser().getUsername());
+                        System.out.println(c.getNumberOfLikes()+1);
+                        c.setNumberOfLikes(c.getNumberOfLikes()+1);
+                    });
+                    
+                    addCommentButton.addActionListener(e -> {
+                    String comment = JOptionPane.showInputDialog("Enter your comment:");
+                    if (comment != null && !comment.trim().isEmpty()) {
+                        System.out.println("Comment saying: " + comment + "added");
+                    }
+                    });
+                    
+                    showCommentsButton.addActionListener(e -> {
+                        // Assuming there's a method to fetch comments for the post
+                        HashMap<String,String> comments = c.getComments(); // Replace with actual method
+                        if (comments != null && !comments.isEmpty()) {
+                            System.out.println("Comments for post by " + i.getUsername() + ":");
+                            for (String line : comments.keySet()) {
+                                System.out.println("Comment from: " + line + ", Saying: " + comments.get(line));
+                            }
+                        } else {
+                            System.out.println("No comments yet!");
+                        }
+                    });
+                    // Add buttons to the button panel
+                    buttonPanel.add(likeButton);
+                    buttonPanel.add(addCommentButton);
+                    buttonPanel.add(showCommentsButton);
+
+                    // Add button panel to the main post panel
+                    postPanel.add(buttonPanel, java.awt.BorderLayout.SOUTH);
+                    
                     postsPanel.add(postPanel);
                 } else {
                     JPanel storyPanel = new JPanel();
