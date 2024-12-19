@@ -616,6 +616,34 @@ public final class Database {
                 JSONObjectIter.remove("BlockedUsersID");
                 JSONObjectIter.put("BlockedUsersID", blockedJSONArray);
 
+                JSONArray contentsArray = JSONObjectIter.getJSONArray("Contents");
+
+                // Iterate over the Contents JSONArray
+                for (int k = 0; k < contentsArray.length(); k++) {
+                    JSONObject contentObject = contentsArray.getJSONObject(k);
+
+                    // Update fields in the contentObject if necessary
+                    if (contentObject.getString("UserID").equals(loggedInUserID)) {
+                        // Example: Update the text of the content
+                        contentObject.put("Text", "Updated text value or logic here");
+
+                        // Example: Update the number of likes
+                        contentObject.put("Likes", contentObject.getInt("Likes") + 1);
+                    }
+
+                    // Example: Add a new comment to the Comments JSONArray
+                    JSONArray commentsArray = contentObject.getJSONArray("Comments");
+                    commentsArray.put(loggedInUserID + ",This is a new comment");
+
+                    // Replace updated Comments array
+                    contentObject.put("Comments", commentsArray);
+
+                    // Apply other updates to fields like CreationTime, Type, etc., if needed
+                }
+
+                // Replace the updated Contents JSONArray in the main JSON object
+                JSONObjectIter.put("Contents", contentsArray);
+
                 done = true;
             }
 
@@ -674,7 +702,36 @@ public final class Database {
                 }
                 JSONObjectIter.remove("BlockedUsersID");
                 JSONObjectIter.put("BlockedUsersID", blockedJSONArray);
-                done = true;
+                
+                JSONArray contentsArray = JSONObjectIter.getJSONArray("Contents");
+
+                // Iterate over the Contents JSONArray
+                for (int k = 0; k < contentsArray.length(); k++) {
+                    JSONObject contentObject = contentsArray.getJSONObject(k);
+
+                    // Update fields in the contentObject if necessary
+                    if (contentObject.getString("UserID").equals(loggedInUserID)) {
+                        // Example: Update the text of the content
+                        contentObject.put("Text", "Updated text value or logic here");
+
+                        // Example: Update the number of likes
+                        contentObject.put("Likes", contentObject.getInt("Likes") + 1);
+                    }
+
+                    // Example: Add a new comment to the Comments JSONArray
+                    JSONArray commentsArray = contentObject.getJSONArray("Comments");
+                    commentsArray.put(loggedInUserID + ",This is a new comment");
+
+                    // Replace updated Comments array
+                    contentObject.put("Comments", commentsArray);
+
+                    // Apply other updates to fields like CreationTime, Type, etc., if needed
+                }
+
+                // Replace the updated Contents JSONArray in the main JSON object
+                JSONObjectIter.put("Contents", contentsArray);
+
+
             }
 
             mainJSONArray.put(i, JSONObjectIter); // replace json object in database file with edited one
