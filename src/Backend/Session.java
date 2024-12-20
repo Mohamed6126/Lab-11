@@ -18,7 +18,8 @@ import javax.imageio.ImageIO;
  * @author vip comp
  */
 public class Session {
-
+   
+    private static final String CHAT_FILE = "Databases/chats.json";
     private final String groupsFilename = "Databases/Groups.json";
     private final String notificationFilePath = "Databases/Notification.json";
 
@@ -407,6 +408,83 @@ public class Session {
             throw new RuntimeException("An error occurred while writing to the file.");
         }
     }
+    
+public void addMessage(String user1Name, String user2Name, String message) throws IOException {
+   
+    JSONObject chatData = readChatFile();  
+    JSONArray chats = chatData.getJSONArray("chats");
+    boolean chatExists = false;
+    for (int i = 0; i < chats.length(); i++) {
+        JSONObject chat = chats.getJSONObject(i);
+        if ((chat.getString("user1Name").equals(user1Name) && chat.getString("user2Name").equals(user2Name)) || 
+            (chat.getString("user1Name").equals(user2Name) && chat.getString("user2Name").equals(user1Name))) {
+
+            JSONArray messages = chat.getJSONArray("messages");
+            JSONObject newMessage = new JSONObject();
+            newMessage.put("senderName", user1Name);
+            newMessage.put("message", message);
+            newMessage.put("timestamp", java.time.LocalDateTime.now().toString());
+            messages.put(newMessage);
+
+            chatExists = true;
+            break;
+        }
+    }
+
+    if (!chatExists) {
+        JSONObject newChat = new JSONObject();
+        newChat.put("user1Name",user1Name );
+        newChat.put("user2Name", user2Name);
+        JSONArray newMessages = new JSONArray();
+        JSONObject newMessage = new JSONObject();
+        newMessage.put("senderName", user1Name);
+        newMessage.put("message", message);
+        newMessage.put("timestamp", java.time.LocalDateTime.now().toString());
+        newMessages.put(newMessage);
+        newChat.put("messages", newMessages);
+        chats.put(newChat);
+    }
+
+    try (FileWriter file = new FileWriter(CHAT_FILE)) {
+        file.write(chatData.toString(4));  
+    }
+}
+    private JSONObject readChatFile() throws IOException {
+        File file = new File(CHAT_FILE);
+        JSONObject chatData = new JSONObject();
+        
+        if (file.exists()) {
+            
+            try (FileReader reader = new FileReader(file)) {
+                int i;
+                StringBuilder jsonContent = new StringBuilder();
+                while ((i = reader.read()) != -1) {
+                    jsonContent.append((char) i);
+                }
+                chatData = new JSONObject(jsonContent.toString());
+            }
+        } else {
+           
+            chatData.put("chats", new JSONArray());
+        }
+
+        return chatData;
+    }
+    public JSONArray getMessages(String user1Name, String user2Name) throws IOException {
+    JSONObject chatData = readChatFile();  
+    JSONArray chats = chatData.getJSONArray("chats");
+
+    for (int i = 0; i < chats.length(); i++) {
+        JSONObject chat = chats.getJSONObject(i);
+        if ((chat.getString("user1Name").equals(user1Name) && chat.getString("user2Name").equals(user2Name)) || 
+            (chat.getString("user1Name").equals(user2Name) && chat.getString("user2Name").equals(user1Name))) {
+            
+            return chat.getJSONArray("messages");  
+        }
+    }
+    return new JSONArray();  
+}
+
 
 }
 

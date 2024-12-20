@@ -272,7 +272,17 @@ public class User {
         this.coverPhoto = coverPhoto;
         this.coverPhotoPath = "CoverProfileImages/Covers/" + userID + coverPhotoPath.substring(coverPhotoPath.lastIndexOf("."));
     }
-
+    public boolean isFriend(String userName) {
+    if (friends == null || friends.isEmpty()) {
+        return false; 
+    }
+    for (User friend : friends) {
+        if (friend.getUsername().equals(userName)) {
+            return true; 
+        }
+    }
+    return false; 
+   }
 
 
 

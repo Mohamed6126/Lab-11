@@ -7,13 +7,16 @@ import Backend.User;
 import org.json.JSONObject;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -53,9 +56,66 @@ public class NewsFeed extends javax.swing.JFrame {
                         imageLabel.setIcon(new ImageIcon(scaledImage));
                         postPanel.add(imageLabel, java.awt.BorderLayout.CENTER);
                     }
-                    System.out.println(c.getText());
                     JLabel postText = new JLabel(c.getText());
                     postPanel.add(postText, java.awt.BorderLayout.SOUTH);
+                    
+                    JPanel buttonPanel = new JPanel();
+                    buttonPanel.setLayout(new java.awt.FlowLayout()); // Arrange buttons in a row
+
+                    // Create buttons
+                    JButton likeButton = new JButton("Like");
+                    JButton addCommentButton = new JButton("Add comment");
+                    JButton showCommentsButton = new JButton("Show comments");
+                    likeButton.setBackground(Color.LIGHT_GRAY);
+                    likeButton.addActionListener(e -> {
+                        if (likeButton.getBackground().equals(Color.LIGHT_GRAY)) {
+                                likeButton.setBackground(Color.CYAN);
+                                c.setNumberOfLikes(c.getNumberOfLikes() + 1);
+                                S.addNotificationToFile(c.getUserID(), "Like",S.getLoggedInUser().getUsername() + " liked your post");
+                            } else {
+                                likeButton.setBackground(Color.LIGHT_GRAY);
+                                c.setNumberOfLikes(c.getNumberOfLikes() - 1);
+                            }                      
+                    });
+                    
+                    addCommentButton.addActionListener(e -> {
+                    String comment = JOptionPane.showInputDialog("Enter your comment:");
+                    if (comment != null && !comment.trim().isEmpty()) {
+                        System.out.println("Comment saying: " + comment + "added");
+                        c.addComment(S.getLoggedInUser().getUsername(), comment);
+                        S.addNotificationToFile(c.getUserID(), "Comment", S.getLoggedInUser().getUsername()+ " commented on your post");
+                    }
+                    });
+                    
+                    showCommentsButton.addActionListener(e -> {
+                        // Assuming there's a method to fetch comments for the post
+                        HashMap<String,String> comments = c.getComments(); // Replace with actual method
+                        if (comments != null && !comments.isEmpty()) {
+                            JPanel commentsPanel = new JPanel();
+                            commentsPanel.setLayout(new BoxLayout(commentsPanel, BoxLayout.Y_AXIS));
+                            System.out.println("Comments for post by " + i.getUsername() + ":");
+                            for (String line : comments.keySet()) {
+                                System.out.println("Comment from: " + line + ", Saying: " + comments.get(line));
+                                JLabel comm = new JLabel(line + " : " + comments.get(line));
+                                commentsPanel.add(comm);
+                            }
+                            JFrame commentsFrame = new JFrame("Comments");
+                            commentsFrame.add(commentsPanel); 
+                            commentsFrame.setSize(400, 300);
+                            commentsFrame.setLocationRelativeTo(null);
+                            commentsFrame.setVisible(true); 
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No comments yet", "Note", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    });
+                    // Add buttons to the button panel
+                    buttonPanel.add(likeButton);
+                    buttonPanel.add(addCommentButton);
+                    buttonPanel.add(showCommentsButton);
+
+                    // Add button panel to the main post panel
+                    postPanel.add(buttonPanel, java.awt.BorderLayout.SOUTH);
+                    
                     postsPanel.add(postPanel);
                 } else {
                     JPanel storyPanel = new JPanel();
@@ -464,7 +524,26 @@ public class NewsFeed extends javax.swing.JFrame {
                     notificationsPanel.repaint();
                 });
                 notificationPanel.add(rejectButton);
-            } else {
+            } else if(type.equalsIgnoreCase("Message")){
+                // Add gotoChat button
+                JButton chatButton = new JButton("Jump to chat");
+                String[] data = message.split(" ");
+                chatButton.addActionListener(e -> {
+                    for(User i : S.getLoggedInUser().getFriends()){
+                        if(i.getUsername().equals(data[0])){
+                            try {
+                                Chat ch = new Chat(S,i);
+                                ch.show();
+                                dispose();
+                            } catch (IOException ex) {
+                                Logger.getLogger(NewsFeed.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+                notificationPanel.add(chatButton);
+            } 
+            else {
                 // For other notifications, just show them
                 notificationPanel.add(new JLabel("(View only)"));
             }
@@ -510,8 +589,10 @@ public class NewsFeed extends javax.swing.JFrame {
                     // Add addFriend button
                     JButton addButton = new JButton("Add Friend");
                     addButton.addActionListener(e -> {
-                        if (S.getLoggedInUser().sendFriendRequest(i))
+                        if (S.getLoggedInUser().sendFriendRequest(i)){
                             JOptionPane.showMessageDialog(this, " Request Sent to " + i.getUsername() + " ! ");
+                            userPanel.remove(addButton);
+                        }
                         else
                             JOptionPane.showMessageDialog(this, " Can't add " + i.getUsername() + " ! ", "Restricted", JOptionPane.ERROR_MESSAGE);
                     });
@@ -538,11 +619,28 @@ public class NewsFeed extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, i.getUsername() + " Already blocked !", "Restricted", JOptionPane.ERROR_MESSAGE);
                     });
                     userPanel.add(blockButton);
-
+                    
+                    // Add Chat button
+                    JButton chatButton = new JButton("Chat");
+                    chatButton.addActionListener(e -> {
+                     if(S.getLoggedInUser().isFriend(i.getUsername())){
+                              try {
+                                Chat ch;
+                                ch = new Chat(S,i);
+                                ch.show();
+                                dispose();
+                                } catch (IOException ex) {
+                                   Logger.getLogger(NewsFeed.class.getName()).log(Level.SEVERE, null, ex);
+                                } 
+                        }
+                     else JOptionPane.showMessageDialog(null, "User is not a friend!", "Error", JOptionPane.ERROR_MESSAGE);
+                        
+                                
+                    });
+                    userPanel.add(chatButton);
                     // Add the requestPanel to the main friendRequestsPanel
                     searchPanel.add(userPanel);
                 }
-
             }
             for (Group g : S.getAllGroups()) {
 
