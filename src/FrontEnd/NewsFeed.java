@@ -7,6 +7,7 @@ import Backend.User;
 import org.json.JSONObject;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -65,11 +66,16 @@ public class NewsFeed extends javax.swing.JFrame {
                     JButton likeButton = new JButton("Like");
                     JButton addCommentButton = new JButton("Add comment");
                     JButton showCommentsButton = new JButton("Show comments");
-
+                    likeButton.setBackground(Color.LIGHT_GRAY);
                     likeButton.addActionListener(e -> {
-                        System.out.println("Liked post by: " + S.getLoggedInUser().getUsername());
-                        c.setNumberOfLikes(c.getNumberOfLikes()+1);
-                        S.addNotificationToFile(c.getUserID(), "Like",S.getLoggedInUser().getUsername()+ " liked your post");
+                        if (likeButton.getBackground().equals(Color.LIGHT_GRAY)) {
+                                likeButton.setBackground(Color.CYAN);
+                                c.setNumberOfLikes(c.getNumberOfLikes() + 1);
+                                S.addNotificationToFile(c.getUserID(), "Like",S.getLoggedInUser().getUsername() + " liked your post");
+                            } else {
+                                likeButton.setBackground(Color.LIGHT_GRAY);
+                                c.setNumberOfLikes(c.getNumberOfLikes() - 1);
+                            }                      
                     });
                     
                     addCommentButton.addActionListener(e -> {
@@ -509,7 +515,26 @@ public class NewsFeed extends javax.swing.JFrame {
                     notificationsPanel.repaint();
                 });
                 notificationPanel.add(rejectButton);
-            } else {
+            } else if(type.equalsIgnoreCase("Message")){
+                // Add gotoChat button
+                JButton chatButton = new JButton("Jump to chat");
+                String[] data = message.split(" ");
+                chatButton.addActionListener(e -> {
+                    for(User i : S.getLoggedInUser().getFriends()){
+                        if(i.getUsername().equals(data[0])){
+                            try {
+                                Chat ch = new Chat(S,i);
+                                ch.show();
+                                dispose();
+                            } catch (IOException ex) {
+                                Logger.getLogger(NewsFeed.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
+                });
+                notificationPanel.add(chatButton);
+            } 
+            else {
                 // For other notifications, just show them
                 notificationPanel.add(new JLabel("(View only)"));
             }
