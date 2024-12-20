@@ -555,8 +555,10 @@ public class NewsFeed extends javax.swing.JFrame {
                     // Add addFriend button
                     JButton addButton = new JButton("Add Friend");
                     addButton.addActionListener(e -> {
-                        if (S.getLoggedInUser().sendFriendRequest(i))
+                        if (S.getLoggedInUser().sendFriendRequest(i)){
                             JOptionPane.showMessageDialog(this, " Request Sent to " + i.getUsername() + " ! ");
+                            userPanel.remove(addButton);
+                        }
                         else
                             JOptionPane.showMessageDialog(this, " Can't add " + i.getUsername() + " ! ", "Restricted", JOptionPane.ERROR_MESSAGE);
                     });
@@ -583,7 +585,16 @@ public class NewsFeed extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, i.getUsername() + " Already blocked !", "Restricted", JOptionPane.ERROR_MESSAGE);
                     });
                     userPanel.add(blockButton);
-
+                    
+                    // Add Block button
+                    JButton chatButton = new JButton("Chat");
+                    blockButton.addActionListener(e -> {
+                        if (S.getLoggedInUser().getFriends().contains(i))
+                            System.out.println("Rredirecting to Chat");///Replace with screen
+                        else
+                            JOptionPane.showMessageDialog(this, i.getUsername() + " is not your friend !", "Restricted", JOptionPane.ERROR_MESSAGE);
+                    });
+                    userPanel.add(chatButton);
                     // Add the requestPanel to the main friendRequestsPanel
                     searchPanel.add(userPanel);
                 }
