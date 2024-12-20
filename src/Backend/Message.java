@@ -11,32 +11,32 @@ import java.time.LocalDateTime;
  * @author Metro
  */
 public class Message {
-    private String senderID;
-    private String recieverID;
+    private String senderName;
+    private String recieverName;
     private String message;
     private LocalDateTime timestamp;
 
-    public Message(String senderID, String recieverID, String message) {
-        this.senderID = senderID;
-        this.recieverID = recieverID;
+    public Message(String senderName, String recieverName, String message) {
+        this.senderName = senderName;
+        this.recieverName = recieverName;
         this.message = message;
         this.timestamp = LocalDateTime.now();
     }
 
-    public String getSenderID() {
-        return senderID;
+    public String getsenderName() {
+        return senderName;
     }
 
-    public void setSenderID(String senderID) {
-        this.senderID = senderID;
+    public void setsenderName(String senderName) {
+        this.senderName = senderName;
     }
 
-    public String getRecieverID() {
-        return recieverID;
+    public String getrecieverName() {
+        return recieverName;
     }
 
-    public void setRecieverID(String recieverID) {
-        this.recieverID = recieverID;
+    public void setrecieverName(String recieverName) {
+        this.recieverName = recieverName;
     }
 
     public String getMessage() {

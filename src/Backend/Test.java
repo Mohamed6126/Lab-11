@@ -15,26 +15,26 @@ public class Test {
         Session session = new Session();
       System.out.println("Test class executed.");
       
-        String user1ID = "user1";
-        String user2ID = "user2";
-        String message="zizoooooooooooooo";
-        /*
-JSONArray messages = session.getMessages(user1ID, user2ID);
+        String user1Name = "ahmed";
+        String user2Name = "mohamed";
+        String message="Aboelwafa";
+        
+    /*JSONArray messages = session.getMessages(user1Name, user2Name);
 
         if (messages.length() > 0) {
-            System.out.println("Messages between " + user1ID + " and " + user2ID + ":");
+            System.out.println("Messages between " + user1Name + " and " + user2Name + ":");
             for (int i = 0; i < messages.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
-                System.out.println("Sender: " + message.getString("senderID"));
+                System.out.println("SenderName: " + message.getString("senderName"));
                 System.out.println("Message: " + message.getString("message"));
                 System.out.println("Timestamp: " + message.getString("timestamp"));
                 System.out.println("---");
             }
         } else {
-            System.out.println("No messages found between " + user1ID + " and " + user2ID);
+            System.out.println("No messages found between " + user1Name + " and " + user2Name);
         }
       */
-      session.addMessage(user1ID, user2ID, message);
+      session.addMessage(user1Name, user2Name, message);
        
     }
 }  

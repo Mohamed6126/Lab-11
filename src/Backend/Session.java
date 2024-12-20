@@ -409,20 +409,19 @@ public class Session {
         }
     }
     
-public void addMessage(String userID1, String userID2, String message) throws IOException {
-   int check=1;
+public void addMessage(String user1Name, String user2Name, String message) throws IOException {
    
     JSONObject chatData = readChatFile();  
     JSONArray chats = chatData.getJSONArray("chats");
     boolean chatExists = false;
     for (int i = 0; i < chats.length(); i++) {
         JSONObject chat = chats.getJSONObject(i);
-        if ((chat.getString("user1ID").equals(userID1) && chat.getString("user2ID").equals(userID2)) || 
-            (chat.getString("user1ID").equals(userID2) && chat.getString("user2ID").equals(userID1))) {
+        if ((chat.getString("user1Name").equals(user1Name) && chat.getString("user2Name").equals(user2Name)) || 
+            (chat.getString("user1Name").equals(user2Name) && chat.getString("user2Name").equals(user1Name))) {
 
             JSONArray messages = chat.getJSONArray("messages");
             JSONObject newMessage = new JSONObject();
-            newMessage.put("senderID", userID1);
+            newMessage.put("senderName", user1Name);
             newMessage.put("message", message);
             newMessage.put("timestamp", java.time.LocalDateTime.now().toString());
             messages.put(newMessage);
@@ -434,11 +433,11 @@ public void addMessage(String userID1, String userID2, String message) throws IO
 
     if (!chatExists) {
         JSONObject newChat = new JSONObject();
-        newChat.put("user1ID", userID1);
-        newChat.put("user2ID", userID2);
+        newChat.put("user1Name",user1Name );
+        newChat.put("user2Name", user2Name);
         JSONArray newMessages = new JSONArray();
         JSONObject newMessage = new JSONObject();
-        newMessage.put("senderID", userID1);
+        newMessage.put("senderName", user1Name);
         newMessage.put("message", message);
         newMessage.put("timestamp", java.time.LocalDateTime.now().toString());
         newMessages.put(newMessage);
@@ -471,14 +470,14 @@ public void addMessage(String userID1, String userID2, String message) throws IO
 
         return chatData;
     }
-    public JSONArray getMessages(String userID1, String userID2) throws IOException {
+    public JSONArray getMessages(String user1Name, String user2Name) throws IOException {
     JSONObject chatData = readChatFile();  
     JSONArray chats = chatData.getJSONArray("chats");
 
     for (int i = 0; i < chats.length(); i++) {
         JSONObject chat = chats.getJSONObject(i);
-        if ((chat.getString("user1ID").equals(userID1) && chat.getString("user2ID").equals(userID2)) || 
-            (chat.getString("user1ID").equals(userID2) && chat.getString("user2ID").equals(userID1))) {
+        if ((chat.getString("user1Name").equals(user1Name) && chat.getString("user2Name").equals(user2Name)) || 
+            (chat.getString("user1Name").equals(user2Name) && chat.getString("user2Name").equals(user1Name))) {
             
             return chat.getJSONArray("messages");  
         }

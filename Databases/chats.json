@@ -1,26 +1,31 @@
 {"chats": [{
-    "user2ID": "user2",
+    "user1Name": "ahmed",
+    "user2Name": "mohamed",
     "messages": [
         {
-            "senderID": "user1",
+            "senderName": "ahmed",
             "message": "zamalek is the best",
             "timestamp": "2024-12-19T14:41:00.195400500"
         },
         {
-            "senderID": "user1",
+            "senderName": "ahmed",
             "message": "zamalek is the best",
             "timestamp": "2024-12-19T14:44:08.010524900"
         },
         {
-            "senderID": "user2",
+            "senderName": "mohamed",
             "message": "shikaaaaaaaaaaaaaa",
             "timestamp": "2024-12-19T14:45:37.904264900"
         },
         {
-            "senderID": "user1",
+            "senderName": "ahmed",
             "message": "zizoooooooooooooo",
             "timestamp": "2024-12-20T12:13:45.000906600"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Aboelwafa",
+            "timestamp": "2024-12-20T16:42:03.010091700"
         }
-    ],
-    "user1ID": "user1"
+    ]
 }]}
