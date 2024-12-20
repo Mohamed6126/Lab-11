@@ -141,13 +141,17 @@ public final class Database {
         jsonObject.put("Type", content.getType());
         jsonObject.put("ImageFilePath", content.getImageFilename());
         
-        if (content.getType().equalsIgnoreCase("Post")) {
-            
+        System.out.println("STOPPED BEFORE THE IF IN CONTENTJSON");
+        if (content.getType().equalsIgnoreCase("post")) {
+            System.out.println("STOPPED IN THE IF IN CONTENTJSON");
+            System.out.println("Number of likes: "+content.getNumberOfLikes());
             jsonObject.put("Likes", content.getNumberOfLikes());
 
             HashMap <String, String> comments = content.getComments();
             JSONArray commentsJSONArray = new JSONArray();
+            
             if(comments!=null){
+                System.out.println("COMMENTS NOT EQUAL TO NULL");
                 for (Map.Entry<String, String> entry : comments.entrySet()) {
                     System.out.println(entry.getValue());
                 commentsJSONArray.put(entry.getKey() + "," + entry.getValue());
@@ -155,6 +159,7 @@ public final class Database {
             jsonObject.put("Comments", commentsJSONArray);
             }
             else{
+                System.out.println("COMMENTS EQUAL NULL");
                 jsonObject.put("Comments", new JSONArray());
             }
         }
@@ -166,6 +171,19 @@ public final class Database {
         return jsonObject;
     }
 
+    void testForContentToJSON(User myUser)
+    {
+        for (Content contentIter : myUser.getContents())
+            contentToJSON(contentIter);
+    }
+    JSONArray getCommentsJSONArray(Content content)
+    {
+        JSONArray commentsJSONArray = new JSONArray();
+        HashMap<String, String> comments = content.getComments();
+        for(Map.Entry<String, String> entry : comments.entrySet())
+          commentsJSONArray.put(entry.getKey() + "," + entry.getValue());  
+        return commentsJSONArray;    
+    }
     ArrayList<Content> loadContents(JSONArray myJSONArray) {
         ArrayList<Content> contents = new ArrayList<>();
 
@@ -177,6 +195,7 @@ public final class Database {
         String imageFilename;
         String type;
 
+        System.out.println("number of elements in myJSONArray = "+myJSONArray.length());
         for (int i = 0; i < myJSONArray.length(); i++) {
 
             JSONObject contentJSONObject = myJSONArray.getJSONObject(i);
@@ -197,23 +216,35 @@ public final class Database {
             if (type.equalsIgnoreCase("post")) {
                 int numberOfLikes;
                 HashMap<String, String> comments = new HashMap<>();
-                String concatenatedString;
 
+                //setting number of likes for post
                 numberOfLikes = contentJSONObject.getInt("Likes");
                 content.setNumberOfLikes(numberOfLikes);
                 
                 JSONArray commentsArray = contentJSONObject.getJSONArray("Comments");
                 for (int j = 0; j < commentsArray.length(); j++) {
-                    concatenatedString = commentsArray.getString(j);
+                    String concatenatedString = commentsArray.getString(j);
                     String[] separatedString = concatenatedString.split(",");
                     String commentUserId = separatedString[0];
                     String comment = separatedString[1];
                     comments.put(commentUserId, comment);
+                    
+                    //test to see the outcome of splitting the concat. str
+                    System.out.println("Before splitting: "+concatenatedString);
+                    System.out.println("Commenter's id: "+commentUserId);
+                    System.out.println("Comment: "+comment);
                 }
+                //setting comments for post
             content.setComments(comments);
             }
             //no need to set numberOfLikes or comments for story 
             //because they're already initialized in the constructor
+            
+            //setting for story just in case
+            else{
+                content.setNumberOfLikes(0);
+                content.setComments(new HashMap<>());
+            }
             contents.add(content);
         }
         return contents;
@@ -620,6 +651,7 @@ public final class Database {
 
                 // Iterate over the Contents JSONArray
                 for (int k = 0; k < contentsArray.length(); k++) {
+                    //kth post/story
                     JSONObject contentObject = contentsArray.getJSONObject(k);
 
                     // Update fields in the contentObject if necessary
@@ -627,10 +659,24 @@ public final class Database {
                         // Example: Update the text of the content
                         contentObject.put("Text", "Updated text value or logic here");
 
+                        //To check if number of likes changed or not
+                        //in session or in in any class that manages the database
+                        //int newNumberOfLikes = S.getContentById(contentObject.get("ContentID").getNumberOfLikes();
+                        //if(contentObject.get("Likes") != newNumberOfLikes)
+                        //contentObject.put("Likes", newNumberOfLikes);
+                        
                         // Example: Update the number of likes
                         contentObject.put("Likes", contentObject.getInt("Likes") + 1);
                     }
-
+                    
+                    //To check if comments changed or not
+                    //in session or in in any class that manages the database
+                    //Content c = S.getContentById(contentObject.get("ContentID");
+                    //JSONArray oldJSONArray = contentObject.getJSONArray("Comments");
+                    //JSONArray newJSONArray = getCommentsJSONArray(c);
+                    //if(!oldJSONArray.equals(newJSONArray)
+                    //contentObject.put("Comments", newJSONArray);
+                    
                     // Example: Add a new comment to the Comments JSONArray
                     JSONArray commentsArray = contentObject.getJSONArray("Comments");
                     commentsArray.put(loggedInUserID + ",This is a new comment");
