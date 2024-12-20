@@ -1,6 +1,14 @@
 package FrontEnd;
 
 import Backend.Session;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -8,12 +16,22 @@ import Backend.Session;
  */
 public class Chat extends javax.swing.JFrame {
     private static Session S;
+    private static String contact;
     /**
      * Creates new form Chat
      */
-    public Chat(Session S) {
+    public Chat(Session S,String contact) throws IOException {
         initComponents();
         this.S = S;
+        this.contact = contact;
+        messagesPanel.setLayout(new BoxLayout(messagesPanel, BoxLayout.Y_AXIS));
+        JSONArray chat = S.getMessages(S.getLoggedInUser().getUsername(), contact);
+        for (int i = 0; i < chat.length(); i++) {
+            JSONObject message = (JSONObject) chat.get(i);
+            System.out.println(message.get("senderName").toString());
+            JLabel m = new JLabel(message.get("senderName").toString() +" : "+ message.getString("message"));
+            messagesPanel.add(m);
+        }
     }
 
     /**
@@ -26,28 +44,50 @@ public class Chat extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        messagesPanel = new javax.swing.JPanel();
         addMessageButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+        javax.swing.GroupLayout messagesPanelLayout = new javax.swing.GroupLayout(messagesPanel);
+        messagesPanel.setLayout(messagesPanelLayout);
+        messagesPanelLayout.setHorizontalGroup(
+            messagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        messagesPanelLayout.setVerticalGroup(
+            messagesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 355, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jPanel1);
+        jScrollPane1.setViewportView(messagesPanel);
 
         addMessageButton.setFont(new java.awt.Font("SF Pro Text", 0, 24)); // NOI18N
-        addMessageButton.setText("Add Message");
+        addMessageButton.setText("Send Message");
+        addMessageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMessageButtonActionPerformed(evt);
+            }
+        });
+
+        refreshButton.setFont(new java.awt.Font("SF Pro Display", 0, 14)); // NOI18N
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,9 +95,14 @@ public class Chat extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addMessageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addMessageButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -66,12 +111,44 @@ public class Chat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addMessageButton, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addMessageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(refreshButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+       messagesPanel.repaint();
+       messagesPanel.revalidate();
+       S.refresh();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void addMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMessageButtonActionPerformed
+        String m = JOptionPane.showInputDialog("Enter Message:");
+        if(m.isEmpty() || m.isBlank()) JOptionPane.showMessageDialog(null, "Empty Message Not Sent!", "Error", JOptionPane.ERROR_MESSAGE);
+        else{
+            try {
+                S.addMessage(S.getLoggedInUser().getUsername(), contact, m);
+                JLabel new_m = new JLabel(S.getLoggedInUser().getUsername()+" : "+ m);
+                messagesPanel.add(new_m);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error sending the message!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_addMessageButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        NewsFeed NF = new NewsFeed(S);
+        NF.show();
+        dispose();
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,14 +180,20 @@ public class Chat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Chat(S).setVisible(true);
+                try {
+                    new Chat(S,contact).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMessageButton;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel messagesPanel;
+    private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables
 }

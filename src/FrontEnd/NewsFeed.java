@@ -586,19 +586,27 @@ public class NewsFeed extends javax.swing.JFrame {
                     });
                     userPanel.add(blockButton);
                     
-                    // Add Block button
+                    // Add Chat button
                     JButton chatButton = new JButton("Chat");
-                    blockButton.addActionListener(e -> {
-                        if (S.getLoggedInUser().getFriends().contains(i))
-                            System.out.println("Rredirecting to Chat");///Replace with screen
-                        else
-                            JOptionPane.showMessageDialog(this, i.getUsername() + " is not your friend !", "Restricted", JOptionPane.ERROR_MESSAGE);
+                    chatButton.addActionListener(e -> {
+                     if(S.getLoggedInUser().isFriend(i.getUsername())){
+                              try {
+                                Chat ch;
+                                ch = new Chat(S,i.getUsername());
+                                ch.show();
+                                dispose();
+                                } catch (IOException ex) {
+                                   Logger.getLogger(NewsFeed.class.getName()).log(Level.SEVERE, null, ex);
+                                } 
+                        }
+                     else JOptionPane.showMessageDialog(null, "User is not a friend!", "Error", JOptionPane.ERROR_MESSAGE);
+                        
+                                
                     });
                     userPanel.add(chatButton);
                     // Add the requestPanel to the main friendRequestsPanel
                     searchPanel.add(userPanel);
                 }
-
             }
             for (Group g : S.getAllGroups()) {
 
