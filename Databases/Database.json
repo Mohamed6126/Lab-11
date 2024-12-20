@@ -13,17 +13,17 @@
             {
                 "Type": "Post",
                 "UserID": "user2",
-                "Comments": [],
+                "Comments": ["user1,test"],
                 "CreationTime": "2024-11-04T01:22:09.298878",
                 "ImageFilePath": "Images/user2/121.jpg",
                 "ContentID": "121",
                 "Text": "mohamed is cool",
-                "Likes": 0
+                "Likes": 100
             },
             {
                 "Type": "Post",
                 "UserID": "user2",
-                "Comments": [],
+                "Comments": ["user1,test"],
                 "CreationTime": "2024-12-13T22:01:59.438889",
                 "ImageFilePath": "Images/user2/122.jpg",
                 "ContentID": "122",
@@ -33,7 +33,7 @@
             {
                 "Type": "Post",
                 "UserID": "user2",
-                "Comments": [],
+                "Comments": ["user1,test"],
                 "CreationTime": "2024-12-13T22:03:09.229215",
                 "ImageFilePath": "Images/user2/123.jpg",
                 "ContentID": "123",
@@ -43,7 +43,7 @@
             {
                 "Type": "Post",
                 "UserID": "user2",
-                "Comments": [],
+                "Comments": ["user1,test"],
                 "CreationTime": "2024-12-13T22:07:48.523253",
                 "ImageFilePath": "Images/user2/124.jpg",
                 "ContentID": "124",
@@ -69,7 +69,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-04T01:22:09.298878",
                 "ImageFilePath": "Images/user1/125.jpg",
                 "ContentID": "125",
@@ -79,7 +79,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-12T00:24:13.148707",
                 "ImageFilePath": "Images/user1/126.jpg",
                 "ContentID": "126",
@@ -89,7 +89,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-12T14:27:40.130740600",
                 "ImageFilePath": "Images/user1/127.png",
                 "ContentID": "127",
@@ -99,7 +99,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-12T14:28:40.519418",
                 "ImageFilePath": "Images/user1/128.png",
                 "ContentID": "128",
@@ -109,17 +109,15 @@
             {
                 "Type": "Story",
                 "UserID": "user1",
-                "Comments": [],
                 "CreationTime": "2024-12-12T20:14:31.109322800",
                 "ImageFilePath": "Images/user1/129.png",
                 "ContentID": "129",
-                "Text": "Ahmed's Story",
-                "Likes": 0
+                "Text": "Ahmed's Story"
             },
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-13T22:14:09.839180",
                 "ImageFilePath": "Images/user1/130.jpg",
                 "ContentID": "130",
@@ -129,7 +127,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-13T22:14:57.384883",
                 "ImageFilePath": "Images/user1/131.jpg",
                 "ContentID": "131",
@@ -139,7 +137,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-13T22:29:23.191766",
                 "ImageFilePath": "Images/user1/132.jpg",
                 "ContentID": "132",
@@ -149,7 +147,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-13T22:29:23.192724",
                 "ImageFilePath": "Images/user1/133.jpg",
                 "ContentID": "133",
@@ -159,7 +157,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-13T22:30:42.982206",
                 "ImageFilePath": "Images/user1/134.jpg",
                 "ContentID": "134",
@@ -169,7 +167,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-18T10:30:31.325689",
                 "ImageFilePath": "Images/user1/135.jpg",
                 "ContentID": "135",
@@ -179,7 +177,7 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": [],
+                "Comments": ["user2,test"],
                 "CreationTime": "2024-12-19T21:22:30.790728900",
                 "ImageFilePath": "Images/user1/136.jpg",
                 "ContentID": "136",
