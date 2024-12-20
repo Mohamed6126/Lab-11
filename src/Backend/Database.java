@@ -653,9 +653,23 @@ public final class Database {
                 for (int k = 0; k < contentsArray.length(); k++) {
                     //kth post/story
                     JSONObject contentObject = contentsArray.getJSONObject(k);
-
+                   
+                        for(Content c: friend.getContents()){
+                           if(contentObject.getString("ContentID").equals(c.getContentID())){
+                               ArrayList<String> data = new ArrayList() ;
+                               if( c.getComments() != null){
+                                   for(String line : c.getComments().keySet()){
+                                    data.add(line + "," + c.getComments().get(line));
+                                }
+                               }
+                               contentObject.put("Comments",data);
+                               
+                               contentObject.put("Likes", c.getNumberOfLikes());
+                           }
+                        }
+                    
                     // Update fields in the contentObject if necessary
-                    if (contentObject.getString("UserID").equals(loggedInUserID)) {
+                    /*if (contentObject.getString("ContentID").equals("")) { ////Search for content ID in memory
                         // Example: Update the text of the content
                         contentObject.put("Text", "Updated text value or logic here");
 
@@ -676,21 +690,22 @@ public final class Database {
                     //JSONArray newJSONArray = getCommentsJSONArray(c);
                     //if(!oldJSONArray.equals(newJSONArray)
                     //contentObject.put("Comments", newJSONArray);
-                    
                     // Example: Add a new comment to the Comments JSONArray
+                    
                     JSONArray commentsArray = contentObject.getJSONArray("Comments");
-                    commentsArray.put(loggedInUserID + ",This is a new comment");
+                    commentsArray.put(loggedInUserID + ",This is a new comment"); //Replace with actual comment
 
                     // Replace updated Comments array
                     contentObject.put("Comments", commentsArray);
 
                     // Apply other updates to fields like CreationTime, Type, etc., if needed
-                }
+                }*/
 
                 // Replace the updated Contents JSONArray in the main JSON object
                 JSONObjectIter.put("Contents", contentsArray);
 
                 done = true;
+            }
             }
 
             // if not logged in or friend then other
