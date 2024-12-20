@@ -1,6 +1,7 @@
 package FrontEnd;
 
 import Backend.Session;
+import Backend.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,16 +17,16 @@ import org.json.JSONObject;
  */
 public class Chat extends javax.swing.JFrame {
     private static Session S;
-    private static String contact;
+    private static User contact;
     /**
      * Creates new form Chat
      */
-    public Chat(Session S,String contact) throws IOException {
+    public Chat(Session S,User contact) throws IOException {
         initComponents();
         this.S = S;
         this.contact = contact;
         messagesPanel.setLayout(new BoxLayout(messagesPanel, BoxLayout.Y_AXIS));
-        JSONArray chat = S.getMessages(S.getLoggedInUser().getUsername(), contact);
+        JSONArray chat = S.getMessages(S.getLoggedInUser().getUsername(), contact.getUsername());
         for (int i = 0; i < chat.length(); i++) {
             JSONObject message = (JSONObject) chat.get(i);
             System.out.println(message.get("senderName").toString());
@@ -135,9 +136,10 @@ public class Chat extends javax.swing.JFrame {
         if(m.isEmpty() || m.isBlank()) JOptionPane.showMessageDialog(null, "Empty Message Not Sent!", "Error", JOptionPane.ERROR_MESSAGE);
         else{
             try {
-                S.addMessage(S.getLoggedInUser().getUsername(), contact, m);
+                S.addMessage(S.getLoggedInUser().getUsername(), contact.getUsername(), m);
                 JLabel new_m = new JLabel(S.getLoggedInUser().getUsername()+" : "+ m);
                 messagesPanel.add(new_m);
+                S.addNotificationToFile(contact.getUserID(), "Message", S.getLoggedInUser().getUsername() + " Sent you a message");
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error sending the message!", "Error", JOptionPane.ERROR_MESSAGE);
             }

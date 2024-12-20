@@ -41,6 +41,11 @@
             "senderName": "ahmed",
             "message": "Checking instant refresh",
             "timestamp": "2024-12-20T17:47:13.619330200"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Testing notifications",
+            "timestamp": "2024-12-20T18:15:04.280631500"
         }
     ]
 }]}

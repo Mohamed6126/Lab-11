@@ -592,7 +592,7 @@ public class NewsFeed extends javax.swing.JFrame {
                      if(S.getLoggedInUser().isFriend(i.getUsername())){
                               try {
                                 Chat ch;
-                                ch = new Chat(S,i.getUsername());
+                                ch = new Chat(S,i);
                                 ch.show();
                                 dispose();
                                 } catch (IOException ex) {
