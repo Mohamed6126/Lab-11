@@ -100,4 +100,11 @@ public class Content {
             this.comments.put(commenterId, comment);
         }
     }
+    
+    public Content getContentById(String contentID)
+    {
+        if(this.contentID.equalsIgnoreCase(contentID))
+            return this;
+        else return null;
+    }
 }
