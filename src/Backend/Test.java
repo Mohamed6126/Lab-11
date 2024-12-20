@@ -14,8 +14,11 @@ public class Test {
       
         Session session = new Session();
       System.out.println("Test class executed.");
+      
         String user1ID = "user1";
         String user2ID = "user2";
+        String message="zizoooooooooooooo";
+        /*
 JSONArray messages = session.getMessages(user1ID, user2ID);
 
         if (messages.length() > 0) {
@@ -30,7 +33,8 @@ JSONArray messages = session.getMessages(user1ID, user2ID);
         } else {
             System.out.println("No messages found between " + user1ID + " and " + user2ID);
         }
-      
+      */
+      session.addMessage(user1ID, user2ID, message);
        
     }
 }  

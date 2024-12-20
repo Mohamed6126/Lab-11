@@ -1,6 +1,4 @@
-{
-    "chats": [
-  {
+{"chats": [{
     "user2ID": "user2",
     "messages": [
         {
@@ -17,9 +15,12 @@
             "senderID": "user2",
             "message": "shikaaaaaaaaaaaaaa",
             "timestamp": "2024-12-19T14:45:37.904264900"
+        },
+        {
+            "senderID": "user1",
+            "message": "zizoooooooooooooo",
+            "timestamp": "2024-12-20T12:13:45.000906600"
         }
     ],
     "user1ID": "user1"
-}
-    ]
-}
+}]}
