@@ -1,0 +1,61 @@
+{"chats": [{
+    "user1Name": "ahmed",
+    "user2Name": "mohamed",
+    "messages": [
+        {
+            "senderName": "ahmed",
+            "message": "zamalek is the best",
+            "timestamp": "2024-12-19T14:41:00.195400500"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "zamalek is the best",
+            "timestamp": "2024-12-19T14:44:08.010524900"
+        },
+        {
+            "senderName": "mohamed",
+            "message": "shikaaaaaaaaaaaaaa",
+            "timestamp": "2024-12-19T14:45:37.904264900"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "zizoooooooooooooo",
+            "timestamp": "2024-12-20T12:13:45.000906600"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Aboelwafa",
+            "timestamp": "2024-12-20T16:42:03.010091700"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "This is test",
+            "timestamp": "2024-12-20T17:39:41.388925"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "This is another test",
+            "timestamp": "2024-12-20T17:40:53.211095800"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Checking instant refresh",
+            "timestamp": "2024-12-20T17:47:13.619330200"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Testing notifications",
+            "timestamp": "2024-12-20T18:15:04.280631500"
+        },
+        {
+            "senderName": "ahmed",
+            "message": "Hello",
+            "timestamp": "2024-12-20T20:36:35.842553800"
+        },
+        {
+            "senderName": "mohamed",
+            "message": "Mohamed Says hi",
+            "timestamp": "2024-12-20T20:40:07.185427800"
+        }
+    ]
+}]}

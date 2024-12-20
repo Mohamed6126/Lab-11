@@ -33,5 +33,60 @@
     "Type": "Friend Request",
     "Message": "ahmedsent a friend request",
     "UserID": "user2"
+  },
+  {
+    "Type": "new post",
+    "Message": "user1 added new post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user1"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Comment",
+    "Message": "ahmed commented on your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Message",
+    "Message": "ahmedSent you a message",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Message",
+    "Message": "ahmed Sent you a message",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Message",
+    "Message": "mohamed Sent you a message",
+    "UserID": "user1"
+  },
+  {
+    "Type": "Comment",
+    "Message": "mohamed commented on your post",
+    "UserID": "user1"
   }
 ]
