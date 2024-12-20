@@ -83,5 +83,10 @@
     "Type": "Message",
     "Message": "mohamed Sent you a message",
     "UserID": "user1"
+  },
+  {
+    "Type": "Comment",
+    "Message": "mohamed commented on your post",
+    "UserID": "user1"
   }
 ]

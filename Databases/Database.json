@@ -49,7 +49,10 @@
             {
                 "Type": "Post",
                 "UserID": "user1",
-                "Comments": ["user2,First Red Bird Comment"],
+                "Comments": [
+                    "user2,First Red Bird Comment",
+                    "mohamed,This is the latest account"
+                ],
                 "CreationTime": "2024-12-04T01:22:09.298878",
                 "ImageFilePath": "Images/user1/125.jpg",
                 "ContentID": "125",

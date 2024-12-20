@@ -82,7 +82,7 @@ public class NewsFeed extends javax.swing.JFrame {
                     String comment = JOptionPane.showInputDialog("Enter your comment:");
                     if (comment != null && !comment.trim().isEmpty()) {
                         System.out.println("Comment saying: " + comment + "added");
-                        c.addComment(S.getLoggedInUser().getUserID(), comment);
+                        c.addComment(S.getLoggedInUser().getUsername(), comment);
                         S.addNotificationToFile(c.getUserID(), "Comment", S.getLoggedInUser().getUsername()+ " commented on your post");
                     }
                     });
@@ -91,12 +91,21 @@ public class NewsFeed extends javax.swing.JFrame {
                         // Assuming there's a method to fetch comments for the post
                         HashMap<String,String> comments = c.getComments(); // Replace with actual method
                         if (comments != null && !comments.isEmpty()) {
+                            JPanel commentsPanel = new JPanel();
+                            commentsPanel.setLayout(new BoxLayout(commentsPanel, BoxLayout.Y_AXIS));
                             System.out.println("Comments for post by " + i.getUsername() + ":");
                             for (String line : comments.keySet()) {
                                 System.out.println("Comment from: " + line + ", Saying: " + comments.get(line));
+                                JLabel comm = new JLabel(line + " : " + comments.get(line));
+                                commentsPanel.add(comm);
                             }
+                            JFrame commentsFrame = new JFrame("Comments");
+                            commentsFrame.add(commentsPanel); 
+                            commentsFrame.setSize(400, 300);
+                            commentsFrame.setLocationRelativeTo(null);
+                            commentsFrame.setVisible(true); 
                         } else {
-                            System.out.println("No comments yet!");
+                            JOptionPane.showMessageDialog(null, "No comments yet", "Note", JOptionPane.INFORMATION_MESSAGE);
                         }
                     });
                     // Add buttons to the button panel
