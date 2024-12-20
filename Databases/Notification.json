@@ -38,5 +38,20 @@
     "Type": "new post",
     "Message": "user1 added new post",
     "UserID": "user2"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user1"
+  },
+  {
+    "Type": "Like",
+    "Message": "ahmed liked your post",
+    "UserID": "user2"
+  },
+  {
+    "Type": "Comment",
+    "Message": "ahmed commented on your post",
+    "UserID": "user2"
   }
 ]

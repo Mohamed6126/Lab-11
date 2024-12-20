@@ -13,12 +13,12 @@
             {
                 "Type": "Post",
                 "UserID": "user2",
-                "Comments": [],
+                "Comments": ["user1,LION 1 COMMENT"],
                 "CreationTime": "2024-11-04T01:22:09.298878",
                 "ImageFilePath": "Images/user2/121.jpg",
                 "ContentID": "121",
                 "Text": "mohamed is cool",
-                "Likes": 1
+                "Likes": 2
             },
             {
                 "Type": "Post",
@@ -28,7 +28,7 @@
                 "ImageFilePath": "Images/user2/124.jpg",
                 "ContentID": "124",
                 "Text": "test",
-                "Likes": 1
+                "Likes": 2
             }
         ],
         "Username": "mohamed",

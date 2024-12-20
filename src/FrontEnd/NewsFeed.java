@@ -68,8 +68,8 @@ public class NewsFeed extends javax.swing.JFrame {
 
                     likeButton.addActionListener(e -> {
                         System.out.println("Liked post by: " + S.getLoggedInUser().getUsername());
-                        System.out.println(c.getNumberOfLikes()+1);
                         c.setNumberOfLikes(c.getNumberOfLikes()+1);
+                        S.addNotificationToFile(c.getUserID(), "Like",S.getLoggedInUser().getUsername()+ " liked your post");
                     });
                     
                     addCommentButton.addActionListener(e -> {
@@ -77,9 +77,7 @@ public class NewsFeed extends javax.swing.JFrame {
                     if (comment != null && !comment.trim().isEmpty()) {
                         System.out.println("Comment saying: " + comment + "added");
                         c.addComment(S.getLoggedInUser().getUserID(), comment);
-                        for(String line : c.getComments().keySet()){
-                            System.out.println(line  + " , " + c.getComments().get(line));
-                        }
+                        S.addNotificationToFile(c.getUserID(), "Comment", S.getLoggedInUser().getUsername()+ " commented on your post");
                     }
                     });
                     

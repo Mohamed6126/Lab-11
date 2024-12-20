@@ -667,39 +667,6 @@ public final class Database {
                                contentObject.put("Likes", c.getNumberOfLikes());
                            }
                         }
-                    
-                    // Update fields in the contentObject if necessary
-                    /*if (contentObject.getString("ContentID").equals("")) { ////Search for content ID in memory
-                        // Example: Update the text of the content
-                        contentObject.put("Text", "Updated text value or logic here");
-
-                        //To check if number of likes changed or not
-                        //in session or in in any class that manages the database
-                        //int newNumberOfLikes = S.getContentById(contentObject.get("ContentID").getNumberOfLikes();
-                        //if(contentObject.get("Likes") != newNumberOfLikes)
-                        //contentObject.put("Likes", newNumberOfLikes);
-                        
-                        // Example: Update the number of likes
-                        contentObject.put("Likes", contentObject.getInt("Likes") + 1);
-                    }
-                    
-                    //To check if comments changed or not
-                    //in session or in in any class that manages the database
-                    //Content c = S.getContentById(contentObject.get("ContentID");
-                    //JSONArray oldJSONArray = contentObject.getJSONArray("Comments");
-                    //JSONArray newJSONArray = getCommentsJSONArray(c);
-                    //if(!oldJSONArray.equals(newJSONArray)
-                    //contentObject.put("Comments", newJSONArray);
-                    // Example: Add a new comment to the Comments JSONArray
-                    
-                    JSONArray commentsArray = contentObject.getJSONArray("Comments");
-                    commentsArray.put(loggedInUserID + ",This is a new comment"); //Replace with actual comment
-
-                    // Replace updated Comments array
-                    contentObject.put("Comments", commentsArray);
-
-                    // Apply other updates to fields like CreationTime, Type, etc., if needed
-                }*/
 
                 // Replace the updated Contents JSONArray in the main JSON object
                 JSONObjectIter.put("Contents", contentsArray);
